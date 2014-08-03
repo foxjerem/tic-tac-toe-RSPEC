@@ -15,4 +15,8 @@ class Grid
 		Array.new(size) { Cell.new }
 	end
 
+	def empty?
+		cells.all?{ |cell| cell.empty? }
+	end
+
 end
