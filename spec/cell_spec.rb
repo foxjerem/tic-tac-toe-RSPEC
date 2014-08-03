@@ -21,9 +21,9 @@ describe Cell do
 	end
 
 	it 'can be displayed' do
-		expect(cell.display).to eq('-')
+		expect(cell.value).to be nil
 		cell.mark_with(x)
-		expect(cell.display).to be x
+		expect(cell.value).to be x
 	end
 	
 end

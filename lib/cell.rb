@@ -19,9 +19,9 @@ class Cell
 		@content = new_content
 	end
 
-	def display
+	def value
 		return content if marked?
-		'-'
+		nil
 	end
 
 end

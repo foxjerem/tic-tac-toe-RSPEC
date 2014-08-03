@@ -2,9 +2,9 @@ require 'game'
 
 describe Game do 
 
-	let(:p1) 		{ double :player, name: 'human', :mark_grid_at => nil			}
-	let(:p2) 		{ double :player, name: 'computer', :mark_grid_at => nil	}
-	let(:game)	{ Game.new(p1,p2)																					}
+	let(:p1) 		{ double :player, name: 'human', :mark => 'x', :mark_grid_at => nil			}
+	let(:p2) 		{ double :player, name: 'computer', :mark => 'o', :mark_grid_at => nil	}
+	let(:game)	{ Game.new(p1,p2)																												}
 
 	it 'starts with an empty grid' do 
 		expect(game.grid).to be_an_instance_of(Grid)
@@ -31,17 +31,20 @@ describe Game do
 		game.go(2)
 	end
 
-	xit "should know if there is a winner" do
+	it "should know if there is a winner" do
 		_win_for_player_one
 		expect(game.winner).to eq(p1)
 	end
 
-	xit "raises error if someones won" do
-	_win_for_player_one
-	expect(lambda{game.go(7)}).to raise_error "Too late, Bob won" 
+	it "raises error if someones won" do
+		_win_for_player_one
+		expect { game.go(7) }.to raise_error "Too late, #{p1.name} won" 
 	end
 
 	def _win_for_player_one
-		[1,4,2,5,3].each{ |plot| game.go(plot) }
+		[1,4,2,5,3].each do |plot| 
+			game.grid.cells[plot-1].mark_with(game.current_player.mark)
+			game.change_turn
+		end
 	end
 end

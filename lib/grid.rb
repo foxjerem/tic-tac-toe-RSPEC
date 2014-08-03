@@ -19,8 +19,8 @@ class Grid
 		cells.all?{ |cell| cell.empty? }
 	end
 
-	def display(index)
-		cells[index].display
+	def value(index)
+		cells[index].value
 	end
 
 end
