@@ -20,7 +20,7 @@ class Cell
 	end
 
 	def display
-		return content.display if marked?
+		return content if marked?
 		'-'
 	end
 

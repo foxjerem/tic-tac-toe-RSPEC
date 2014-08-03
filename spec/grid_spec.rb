@@ -10,4 +10,10 @@ describe Grid do
 		expect(grid.cells.all?{ |cell| cell.is_a?(Cell) }).to be true
 	end
 
+	it 'should know the content of a cell by index' do
+		expect(grid.display(0)).to eq '-'
+		grid.cells[0].mark_with('x')
+		expect(grid.display(0)).to eq 'x'
+	end
+
 end

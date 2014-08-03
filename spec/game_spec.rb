@@ -31,7 +31,7 @@ describe Game do
 		game.go(2)
 	end
 
-	it "should know if there is a winner" do
+	xit "should know if there is a winner" do
 		_win_for_player_one
 		expect(game.winner).to eq(p1)
 	end
@@ -42,6 +42,6 @@ describe Game do
 	end
 
 	def _win_for_player_one
-		[1,4,2,5,3].each{|plot|game.go(plot)}
+		[1,4,2,5,3].each{ |plot| game.go(plot) }
 	end
 end

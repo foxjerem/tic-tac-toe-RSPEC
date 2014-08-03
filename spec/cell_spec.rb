@@ -23,7 +23,7 @@ describe Cell do
 	it 'can be displayed' do
 		expect(cell.display).to eq('-')
 		cell.mark_with(x)
-		expect(cell.display).to eq('x')
+		expect(cell.display).to be x
 	end
 	
 end

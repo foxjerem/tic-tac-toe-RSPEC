@@ -3,8 +3,7 @@ require 'player'
 
 class Game
 	
-	attr_accessor :grid
-	attr_reader :players, :current_player, :other_player
+	attr_reader :grid, :players, :current_player, :other_player
 	
 	WINNING_COMBOS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[2,5,8],[0,4,8],[2,4,6]]
 
@@ -25,8 +24,9 @@ class Game
 	end
 
 	def winner
+		puts grid.inspect
 		winner = WINNING_COMBOS.select do |combo|
-			grid[combo[0]] == grid[combo[1]] && grid[combo[1]] == grid[combo[2]] && grid[combo[0]]
+			grid.cells[combo[0]] == grid.cells[combo[1]] && grid.cells[combo[1]] == grid.cells[combo[2]] && grid.cells[combo[0]]
 		end
 		grid[winner.first.first] == "x" ? player1 : player2 if winner.any?		
 	end
