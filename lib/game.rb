@@ -30,6 +30,22 @@ class Game
 		determine_winner_from_possibles(winner)
 	end
 
+	def result
+		if winner 
+			return 1 if winner.mark == 'x' 
+			return -1 if winner.mark == 'o'
+		else
+			return 0 if finished?
+		end
+		nil
+	end
+
+	private
+
+	def finished?
+		grid.cells.all?(&:marked?)
+	end
+
 	def select_possible_winning_combos
 		WINNING_COMBOS.select do |combo|
 			grid.value(combo[0]) == grid.value(combo[1]) && 
@@ -39,7 +55,7 @@ class Game
 	end
 
 	def determine_winner_from_possibles(winner)
-		grid.cells[winner.first.first] == "x" ? current_player : other_player if winner.any?		
+		grid.cells[winner.first.first] == current_player.mark ? current_player : other_player if winner.any?		
 	end
 
 end

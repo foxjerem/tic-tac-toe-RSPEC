@@ -34,6 +34,13 @@ describe Game do
 	it "should know if there is a winner" do
 		_win_for_player_one
 		expect(game.winner).to eq(p1)
+		expect(game.result).to eq(1)
+	end
+
+	it 'should know if it is a draw' do
+		_force_draw
+		expect(game.result).to eq(0)
+		expect(game.winner).to be nil
 	end
 
 	it "raises error if someones won" do
@@ -47,4 +54,12 @@ describe Game do
 			game.change_turn
 		end
 	end
+
+	def _force_draw
+		[1,5,4,7,3,2,8,6,9].each do |plot| 
+			game.grid.cells[plot-1].mark_with(game.current_player.mark)
+			game.change_turn
+		end
+	end
+	
 end
