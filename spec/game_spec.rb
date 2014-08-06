@@ -28,18 +28,19 @@ describe Game do
 		expect(p1).to receive(:mark_grid_at).with(0, game.grid)
 		expect(p2).to receive(:mark_grid_at).with(1, game.grid)
 		game.go(1)
+		game.change_turn
 		game.go(2)
 	end
 
 	it "should know if there is a winner" do
 		_win_for_player_one
 		expect(game.winner).to eq(p1)
-		expect(game.result).to eq(1)
+		expect(game.score).to eq(-1)
 	end
 
 	it 'should know if it is a draw' do
 		_force_draw
-		expect(game.result).to eq(0)
+		expect(game.score).to eq(0)
 		expect(game.winner).to be nil
 	end
 
@@ -61,5 +62,5 @@ describe Game do
 			game.change_turn
 		end
 	end
-	
+
 end

@@ -22,7 +22,6 @@ class Game
 	def go(index)
 		raise "Too late, #{winner.name} won" if winner
 		current_player.mark_grid_at(index-1, grid)
-		change_turn
 	end
 
 	def winner
@@ -30,13 +29,10 @@ class Game
 		determine_winner_from_possibles(winner)
 	end
 
-	def result
-		if winner 
-			return 1 if winner.mark == 'x' 
-			return -1 if winner.mark == 'o'
-		else
-			return 0 if finished?
-		end
+	def score
+		return 1 if winner == current_player 
+		return -1 if winner == other_player
+		return 0 if finished?
 		nil
 	end
 
