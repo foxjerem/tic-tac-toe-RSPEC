@@ -33,13 +33,23 @@ class Game
 		return 1 if winner == current_player 
 		return -1 if winner == other_player
 		return 0 if finished?
-		nil
+	end
+
+	def available_moves
+		return [] if winner
+		result = grid.cells.select(&:empty?).map{ |cell| grid.cells.index(cell) + 1}
+		return result
 	end
 
 	private
 
 	def finished?
-		grid.cells.all?(&:marked?)
+		grid.cells.all?(&:marked?) or winner
+	end
+
+	def determine_winner_from_possibles(winner)
+		grid.cells[winner.first.first] == current_player.mark ? 
+		current_player : other_player if winner.any?		
 	end
 
 	def select_possible_winning_combos
@@ -48,10 +58,6 @@ class Game
 			grid.value(combo[1]) == grid.value(combo[2]) && 
 			grid.value(combo[0])
 		end
-	end
-
-	def determine_winner_from_possibles(winner)
-		grid.cells[winner.first.first] == current_player.mark ? current_player : other_player if winner.any?		
 	end
 
 end

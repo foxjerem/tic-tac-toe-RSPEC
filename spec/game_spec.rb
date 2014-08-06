@@ -32,6 +32,12 @@ describe Game do
 		game.go(2)
 	end
 
+	it 'knows the available moves' do
+		game.grid.cells[0].mark_with(game.current_player.mark)
+		game.grid.cells[1].mark_with(game.current_player.mark)
+		expect(game.available_moves).to eq [3,4,5,6,7,8,9]
+	end
+
 	it "should know if there is a winner" do
 		_win_for_player_one
 		expect(game.winner).to eq(p1)

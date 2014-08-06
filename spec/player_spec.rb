@@ -1,9 +1,9 @@
 require 'player'
 
-describe Player do
+shared_examples 'player' do
 
 	let(:mark)		{ double :mark													}
-	let(:player) 	{ Player.new('human', mark) 						}
+	let(:player) 	{ described_class.new('human', mark) 		}
 	let(:cell)		{ double :cell, :mark_with => nil 			}
 	let(:cells) 	{ Array.new(Grid::DEFAULT_SIZE, cell)		}
 	let(:grid)		{ double :grid, :cells => cells					}
